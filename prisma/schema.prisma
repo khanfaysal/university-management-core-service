@@ -12,7 +12,7 @@ datasource db {
 
 model AcademicSemester {
   id    String @id @default(uuid())
-  year  String
+  year  Int
   title String
   code  String
 
@@ -32,6 +32,7 @@ model AcademicFaculty {
   updaedAt            DateTime             @updatedAt
   academicDepartments AcademicDepartment[]
   student             Student[]
+  faculties           Faculty[]
 
   @@map("academic_faculty")
 }
@@ -45,6 +46,7 @@ model AcademicDepartment {
   academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
   academicFacultyId String
   students          Student[]
+  faculties         Faculty[]
 
   @@map("academic_departments")
 }
@@ -57,7 +59,7 @@ model Student {
   middleName   String
   profileImage String
   email        String
-  contactNo    Int
+  contactNo    String
   gender       String
   bloodGroup   String
   createdAt    DateTime @default(now())
@@ -83,12 +85,18 @@ model Faculty {
   middleName   String
   profileImage String
   email        String
-  contactNo    Int
+  contactNo    String
   gender       String
   bloodGroup   String
   designation  String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  academicDepartment   AcademicDepartment @relation(fields: [academicDepartmentId], references: [id])
+  academicDepartmentId String
+
+  academicFaculty   AcademicFaculty @relation(fields: [academicFacultyId], references: [id])
+  academicFacultyId String
 
   @@map("faculties")
 }
