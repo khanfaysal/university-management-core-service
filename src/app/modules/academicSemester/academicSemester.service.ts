@@ -1,11 +1,11 @@
-import { AcademicSemester, Prisma, PrismaClient } from '@prisma/client';
+import { AcademicSemester, Prisma } from '@prisma/client';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IAcademicSemisterFilterRequest } from './academicSemester.interface';
 import { AcademicSemesterSearchAbleFields } from './academicSemeter.contants';
+import prisma from '../../../shared/prisma';
 
-const prisma = new PrismaClient();
 
 // academic semester create
 const insertIntoDB = async (

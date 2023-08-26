@@ -5,6 +5,7 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { AcademicSemesterService } from './academicSemester.service';
 import pick from '../../../shared/pick';
+import { AcademicSemesterFilterAbleFields } from './academicSemeter.contants';
 
 const insertionIntoDB = catchAsync(async (req: Request, res: Response) => {
   const result = await AcademicSemesterService.insertIntoDB(req.body);
@@ -20,7 +21,7 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
 
     // filter and pagination data will be separated 
 
-    const filters = pick(req.query, ['searchTerm', 'code', 'startMonth', 'endMonth']);
+    const filters = pick(req.query, AcademicSemesterFilterAbleFields);
     const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
 
 
